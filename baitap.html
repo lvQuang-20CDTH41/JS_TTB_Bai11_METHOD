@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập</title>
+</head>
+
+<body>
+    <script>
+        /* Xây dựng chương trình quản lý danh sách sinh viên
+                1. Thông tin sinh viên:
+                    Tên
+                    Tuổi
+                    Điểm: Toán, Lý, Hóa
+                2. Nhập vào danh sách sinh viên
+                3. In ra danh sách sinh viên
+                4. Sắp xếp sinh viên theo tên
+                5. Xếp loại sinh viên theo điểm trung bình: Giỏi >=8; Khá (>=7, <8); Trung bình: <7
+        */
+        class Sinhvien {
+            constructor(ten, tuoi, toan, ly, hoa) {
+                this.ten = ten;
+                this.tuoi = tuoi;
+                this.toan = toan;
+                this.ly = ly;
+                this.hoa = hoa;
+            }
+            print() {
+                console.log('Ten: ' + this.ten);
+                console.log('Tuoi: ' + this.tuoi);
+                console.log('Toan: ' + this.toan);
+                console.log('Ly: ' + this.ly);
+                console.log('Hoa: ' + this.hoa);
+                console.log("____");
+            }
+        }
+        class addSV {
+            constructor() {
+                this.sinhvien = [];
+            }
+            add(sv) {
+                this.sinhvien.push(sv);
+            }
+            hienthi() {
+                for (let sv of this.sinhvien) {
+                    sv.print();
+                }
+            }
+            medium() {
+                for (let sv of this.sinhvien) {
+                    var dtb = (parseInt(sv.toan) + parseInt(sv.ly) + parseInt(sv.hoa)) / 3;
+                    if (dtb >= 8) {
+                        console.log("ten sv : " + sv.ten + " dtb: " + dtb + " xep loai: Gioi");
+                    } else if (dtb >= 7) {
+                        console.log("ten sv : " + sv.ten + " dtb: " + dtb + " xep loai: Kha");
+                    } else {
+                        console.log("ten sv : " + sv.ten + " dtb: " + dtb + " xep loai: Trung binh");
+                    }
+                }
+            }
+            sapxep() {
+                this.sinhvien.sort((a, b) => (a.ten > b.ten) ? 1 : -1);
+            }
+
+        }
+        let sv = new addSV();
+        do {
+            var ten = prompt("Nhập tên");
+            var tuoi = prompt("Nhập tuổi");
+            var toan = prompt("Nhập điểm toán");
+            var ly = prompt("Nhập điểm lý");
+            var hoa = prompt("Nhập điểm hoá");
+            sv.add(new Sinhvien(ten, tuoi, toan, ly, hoa));
+            var x = confirm('Bạn muốn tiếp tục không');
+        } while (x == true);
+        sv.sapxep();
+        sv.hienthi();
+        sv.medium();
+    </script>
+
+</body>
+
+</html>
